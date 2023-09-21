@@ -57,7 +57,7 @@ export default class ReminderPlugin extends Plugin {
       this.viewProxy,
       this.reminders
     );
-    this.reminderModal = new ReminderModal(this.app, SETTINGS.useSystemNotification, SETTINGS.laters);
+    this.reminderModal = new ReminderModal(this.app, SETTINGS.useObsidianNotification, SETTINGS.useSystemNotification, SETTINGS.laters);
     this.autoComplete = new AutoComplete(SETTINGS.autoCompleteTrigger);
   }
 

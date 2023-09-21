@@ -9,7 +9,7 @@ const electron = require("electron");
 
 export class ReminderModal {
 
-  constructor(private app: App, private useSystemNotification: ReadOnlyReference<boolean>, private laters: ReadOnlyReference<Array<Later>>) { }
+  constructor(private app: App, private useObsidianNotification: ReadOnlyReference<boolean>, private useSystemNotification: ReadOnlyReference<boolean>, private laters: ReadOnlyReference<Array<Later>>) { }
 
   public show(
     reminder: Reminder,
@@ -19,7 +19,9 @@ export class ReminderModal {
     onOpenFile: () => void
   ) {
     if (!this.isSystemNotification()) {
-      this.showBuiltinReminder(reminder, onRemindMeLater, onDone, onMute, onOpenFile);
+      if (this.isObsidianNotification()) {
+        this.showBuiltinReminder(reminder, onRemindMeLater, onDone, onMute, onOpenFile);
+      }
     } else {
       // Show system notification
       const Notification = (electron as any).remote.Notification;
@@ -64,6 +66,13 @@ export class ReminderModal {
     onOpenFile: () => void
   ) {
     new NotificationModal(this.app, this.laters.value, reminder, onRemindMeLater, onDone, onCancel, onOpenFile).open();
+  }
+
+  private isObsidianNotification() {
+    if (this.isMobile()) {
+      return false;
+    }
+    return this.useObsidianNotification.value;
   }
 
   private isSystemNotification() {

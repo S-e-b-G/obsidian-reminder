@@ -11,6 +11,7 @@ class Settings {
   settings: SettingTabModel = new SettingTabModel();
 
   reminderTime: SettingModel<string, Time>;
+  useObsidianNotification: SettingModel<boolean, boolean>;
   useSystemNotification: SettingModel<boolean, boolean>;
   laters: SettingModel<string, Array<Later>>;
   dateFormat: SettingModel<string, string>;
@@ -35,6 +36,13 @@ class Settings {
       .text("09:00")
       .placeHolder("Time (hh:mm)")
       .build(new TimeSerde());
+
+    this.useObsidianNotification = this.settings.newSettingBuilder()
+      .key("useObsidianNotification")
+      .name("Use Obsidian notification")
+      .desc("Use Obsidian notification for reminder notifications")
+      .toggle(false)
+      .build(new RawSerde());
 
     this.useSystemNotification = this.settings.newSettingBuilder()
       .key("useSystemNotification")
@@ -153,6 +161,7 @@ class Settings {
       .addSettings(
         this.reminderTime,
         this.laters,
+        this.useObsidianNotification,
         this.useSystemNotification
       );
     this.settings
