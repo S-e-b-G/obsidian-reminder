@@ -28,18 +28,20 @@
     <table>
         <thead>
             <tr>
-                <th>SUN</th>
+                <th>WkN</th>
                 <th>MON</th>
                 <th>TUE</th>
                 <th>WED</th>
                 <th>THU</th>
                 <th>FRI</th>
                 <th>SAT</th>
+                <th>SUN</th>
             </tr>
         </thead>
         <tbody>
             {#each calendar.current.weeks as week, i}
                 <tr>
+                    <td class="month"> {week.weekNumber} </td>
                     {#each week.days as day, i}
                         <td
                             class="calendar-date"

@@ -18,7 +18,12 @@ export class Day {
 
 export class Week {
     public days: Array<Day> = [];
+    public weekNumber: number;
     constructor(private weekStart: moment.Moment) {
+        if (weekStart.day() === 0) {  // If the week starts on Sunday...
+            weekStart.day(1);  // ...change it to Monday.
+        }
+        this.weekNumber = weekStart.week();
         const current = weekStart.clone();
         for (let i: number = 0; i < 7; i++) {
             this.days.push(new Day(current.clone()));

@@ -16,3 +16,6 @@ data.json
 
 # misc.
 *.log
+src/ui/components/\#Archives/Calendar.svelte
+src/ui/components/\#Archives/Calendar.svelte.bak
+*.bak
