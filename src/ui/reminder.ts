@@ -22,6 +22,10 @@ export class ReminderModal {
       if (this.isObsidianNotification()) {
         this.showBuiltinReminder(reminder, onRemindMeLater, onDone, onMute, onOpenFile);
       }
+      else {
+        onOpenFile();
+      }
+
     } else {
       // Show system notification
       const Notification = (electron as any).remote.Notification;
